@@ -18,7 +18,6 @@ function Button() {
         border: 'solid 1px'
     }} onSubmit={(e)=> {
         e.preventDefault()
-        console.log(e.target.num.value)
         setNum(parseInt(e.target.num.value) + num)
     }}>
         <label style={{ backgroundColor: '#f0f0f0', color: '#333' }} htmlFor="num">
@@ -29,7 +28,7 @@ function Button() {
         <span style={{
             marginTop: '20px'
         }}
-        >{num}</span>
+        >Value = {num}</span>
     </form>
     </>
   )
