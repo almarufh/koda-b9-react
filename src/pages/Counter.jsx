@@ -16,8 +16,6 @@ function Counter({set, get}) {
             onClick={()=> {
                 if(get > 0) {
                     set(get - 1)
-                } else {
-                    setErr("Error cannot under 0")
                 }
             }}>-</button>
             <span
@@ -28,8 +26,6 @@ function Counter({set, get}) {
             onClick={()=> {
                 if(get < 10) {
                     set(get + 1)
-                } else {
-                    setErr("Error cannot upper 10")
                 }
             }}>+</button>
         </div>

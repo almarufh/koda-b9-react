@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
 import { load, save } from "../utils/localStorage.js"
-import Header from "../components/Header.jsx"
-import Footer from "../components/Footer.jsx"
 
 function Review() {
     const [reviews, setReviews] = useState([])
@@ -34,9 +32,7 @@ function Review() {
         save("reviews", reviews)
     }
   return (
-    <>
-    <Header/>
-    <main className='grid grid-cols-2 gap-5 p-5 items-start'>
+    <main className='grid grid-cols-2 gap-5 p-5 items-start min-h-screen'>
         <section className='w-full flex justify-start'>
             <form 
                 className='w-full flex flex-col gap-4'
@@ -82,17 +78,15 @@ function Review() {
                 return (
                     <article 
                         key={r.id}
-                        className="flex flex-col border p-2 rounded-md"
+                        className="flex flex-col border-l border-b-5 p-2 border-blue-100 rounded-md bg-blue-50"
                     >
-                        <span>{r.sender}</span>
-                        <span>{r.message}</span>
+                        <span className="text-xs text-blue-300 font-bold">{r.sender}</span>
+                        <span className="italic text-md text-amber-300">{`"${r.message}"`}</span>
                     </article>
                 )
             })}
         </section>
     </main>
-    <Footer/>
-    </>
   )
 }
 

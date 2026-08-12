@@ -1,18 +1,25 @@
-// import { useNavigate, Link } from "react-router"
-
 import { Link} from "react-router"
 
 function Header() {
-    const navLink = [
+    let navLink = [
         {
-            link: "#",
+            link: "/",
             name: "Reviews"
         },
         {
-            link: "#",
+            link: "/pokemon",
             name: "Pokemon"
-        }
+        },
+        {
+            link: "/products",
+            name: "Products"
+        },
+        {
+            link: "/counter",
+            name: "Counter"
+        },
     ]
+
   return (
     <header
         className='border w-full flex justify-between px-4 py-2'
@@ -26,7 +33,9 @@ function Header() {
             >
                 {navLink.map((res)=> {
                     return (
-                        <li>{res.name}</li>
+                        <li key={res.id}>
+                            <Link to={res.link}>{res.name}</Link>
+                        </li>
                     )
                 })}
             </ul>
