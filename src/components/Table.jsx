@@ -13,7 +13,7 @@ function Table({ props }) {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
-          {props.map((r, i) => {
+          {props.length < 1 ? <span className='flex w-full '>Products Empty!</span> : props.map((r, i) => {
             return (
               <tr key={r.sku} className="hover:bg-gray-50 transition-colors">
                 <td className="py-3 px-4 font-medium text-gray-900">{i + 1}</td>

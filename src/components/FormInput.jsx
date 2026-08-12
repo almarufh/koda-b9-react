@@ -16,8 +16,7 @@ function FormInput({props}) {
                 ...prevState,
                 product
             ]
-            props(data)
-            console.log(data)
+            return data
         })
         e.target.reset()
     }
