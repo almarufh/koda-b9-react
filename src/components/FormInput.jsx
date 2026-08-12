@@ -1,5 +1,16 @@
 import React from 'react'
 
+/**
+ * @typedef {Object} Product
+ * @property {string} sku
+ * @property {string} product
+ * @property {number} stok
+ */
+
+/**
+ * @param {Object} props
+ * @param {import('react').Dispatch<import('react').SetStateAction<Product[]>>} props
+ */
 function FormInput({props}) {
     function addProducts(e) {
         e.preventDefault()
