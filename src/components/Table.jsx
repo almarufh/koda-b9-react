@@ -1,6 +1,14 @@
 import React from 'react'
 
-function Table({ props }) {
+/**
+ * Create table
+ * @param {Object[]} props Data products
+ * @param {string} props[].sku sku product
+ * @param {string} props[].product name product
+ * @param {number} props[].stok stok product
+ * @returns 
+ */
+function Tabe({ props }) {
   return (
     <div className="overflow-x-auto shadow-md rounded-lg border border-gray-200">
       <table className="w-full text-left border-collapse text-sm text-gray-700">
