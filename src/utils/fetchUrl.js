@@ -1,3 +1,8 @@
+/**
+ * Fetching data
+ * @param {string} url 
+ * @returns 
+ */
 async function fetchApi(url) {
     const response = await fetch(url)
     if (!response.ok) {
@@ -6,6 +11,11 @@ async function fetchApi(url) {
     return response.json()
 }
 
+/**
+ * Fetching data Pokemon
+ * @param {string} url URL api get character pokemon
+ * @returns 
+ */
 async function fetchUrl (url) {
     try {
         const {results} = await fetchApi(url)
