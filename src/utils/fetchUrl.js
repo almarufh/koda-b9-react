@@ -26,7 +26,6 @@ async function fetchUrl (url) {
             linkFetch.push(fetchApi(p.url))
         });
         const data = await Promise.all(linkFetch)
-        console.log(data)
         const rests = []
         for (let rest of data) {
             let pokemon = {

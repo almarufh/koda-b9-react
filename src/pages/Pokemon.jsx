@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import {fetchUrl} from '../utils/fetchUrl.js'
-import { Link } from 'react-router'
+import { Link, useSearchParams,  } from 'react-router'
 
 function Pokemon() {
-  const [search, setSearch] = useState("")
+  const [param, setParam] = useSearchParams()
+  const [search, setSearch] = useState(param.get("search") || "")
   const [data, setData] = useState([])
+
   useEffect(()=>{
     (async()=> {
       try {
@@ -18,18 +20,46 @@ function Pokemon() {
 
   const searching = data.filter((e)=> (e.name.toLocaleLowerCase()).includes(search.toLocaleLowerCase()))
 
+
   function getSearch (e) {
     e.preventDefault()
     const data = new FormData(e.target)
     const value = data.get("search")
+    setParam((prevParam) => {
+      if (value) {
+        prevParam.set("search", value);
+      } else {
+        prevParam.delete("search");
+      }
+      setSearch(value)
+      return prevParam;
+    });
     setSearch(value)
     e.target.reset()
   }
 
   return (
-    <div className="flex flex-col py-5">
+    <div className="flex flex-col py-5 min-h-screen">
       <form onSubmit={getSearch} className="flex w-full px-4 gap-1">
-        <input type="text" name="search" placeholder='search keywords' className='w-full border border-cyan-500 rounded-md p-2 outline-none' />
+        <input 
+          onChange={(e)=>{
+            const value = e.target.value;
+            setParam((prevParam) => {
+              if (value) {
+                prevParam.set("search", value);
+              } else {
+                prevParam.delete("search");
+                setSearch(value)
+              }
+              return prevParam;
+            });
+          }}
+          type="text" 
+          name="search" 
+          defaultValue={search}
+          placeholder='search keywords' 
+          className='w-full border border-cyan-500 rounded-md p-2 outline-none' 
+        />
         <button type='submit' className='flex gap-2 bg-cyan-100 justify-center items-center px-4 py-1 rounded-xl'>
           <img src="/search.svg" alt="search" />
           <span className='font-bold text-md text-[#0fffaf]'>SEARCH</span>
