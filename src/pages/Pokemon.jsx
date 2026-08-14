@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import fetchUrl from '../utils/fetchUrl.js'
+import {fetchUrl} from '../utils/fetchUrl.js'
+import { Link } from 'react-router'
 
 function Pokemon() {
   const [search, setSearch] = useState("")
@@ -7,7 +8,6 @@ function Pokemon() {
   useEffect(()=>{
     (async()=> {
       try {
-        console.log("fetchuing")
         const results = await fetchUrl("https://pokeapi.co/api/v2/pokemon?limit=56&offset=0")
         setData(results)
       } catch (err) {
@@ -17,7 +17,7 @@ function Pokemon() {
   }, [])
 
   const searching = data.filter((e)=> (e.name.toLocaleLowerCase()).includes(search.toLocaleLowerCase()))
-  
+
   function getSearch (e) {
     e.preventDefault()
     const data = new FormData(e.target)
@@ -41,15 +41,17 @@ function Pokemon() {
         searching.map((res, idx)=> {
           return (
             <article key={idx} className='flex flex-col rounded-xl items-center justify-between pb-2 bg-blue-100 border-l-2 border-b-5 border-b-emerald-200'>
-              <img src={res.foto} alt={res.name} />
-              <span className="font-bold text-md">{res.name.toUpperCase()}</span>
-              <div className="flex gap-2 italic bg-emerald-200 px-6 py-1 rounded-md">
-                {res.types.map((type, i)=> {
-                  return (
-                    <span key={i}>{type}</span>
-                  )
-                })}
-              </div>
+              <Link to={`/pokemon/${res.id}`}>
+                <img src={res.foto} alt={res.name} />
+                <span className="font-bold text-md">{res.name.toUpperCase()}</span>
+                <div className="flex gap-2 italic bg-emerald-200 px-6 py-1 rounded-md">
+                  {res.types.map((type, i)=> {
+                    return (
+                      <span key={i}>{type}</span>
+                    )
+                  })}
+                </div>
+              </Link>
             </article>
           )
         })

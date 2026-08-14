@@ -3,6 +3,8 @@
  * @param {string} url 
  * @returns 
  */
+
+
 async function fetchApi(url) {
     const response = await fetch(url)
     if (!response.ok) {
@@ -24,13 +26,16 @@ async function fetchUrl (url) {
             linkFetch.push(fetchApi(p.url))
         });
         const data = await Promise.all(linkFetch)
+        console.log(data)
         const rests = []
         for (let rest of data) {
             let pokemon = {
+                id: "",
                 name: "",
                 foto: "",
                 types : []
             }
+            pokemon.id = rest.id
             pokemon.name = rest.name
             pokemon.foto = rest.sprites.front_default
             const types = rest.types
@@ -47,4 +52,7 @@ async function fetchUrl (url) {
 
 }
 
-export default fetchUrl
+export {
+    fetchApi, 
+    fetchUrl
+}

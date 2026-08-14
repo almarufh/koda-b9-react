@@ -8,7 +8,7 @@ import React from 'react'
  * @param {number} props[].stok stok product
  * @returns 
  */
-function Tabe({ props }) {
+function Table({ props }) {
   return (
     <div className="overflow-x-auto shadow-md rounded-lg border border-gray-200">
       <table className="w-full text-left border-collapse text-sm text-gray-700">

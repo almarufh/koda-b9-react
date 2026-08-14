@@ -3,7 +3,7 @@ import { Link} from "react-router"
 function Header() {
     let navLink = [
         {
-            link: "/",
+            link: "/reviews",
             name: "Reviews"
         },
         {
@@ -18,6 +18,10 @@ function Header() {
             link: "/counter",
             name: "Counter"
         },
+        {
+            link: "/control",
+            name: "Controled"
+        }
     ]
 
   return (
