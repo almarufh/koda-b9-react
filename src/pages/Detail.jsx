@@ -32,7 +32,6 @@ function Detail() {
             })
 
             pokemon.stats = stats
-            console.log(pokemon)
 
             setData(pokemon)
 
