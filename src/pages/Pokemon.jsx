@@ -1,25 +1,38 @@
 import React, { useEffect, useState } from 'react'
-import {fetchUrl} from '../utils/fetchUrl.js'
+import {fetchApi, fetchUrl} from '../utils/fetchUrl.js'
 import { Link, useSearchParams,  } from 'react-router'
 
 function Pokemon() {
   const [param, setParam] = useSearchParams()
   const [search, setSearch] = useState(param.get("search") || "")
+  const [type, setType] = useState([])
   const [data, setData] = useState([])
 
   useEffect(()=>{
     (async()=> {
       try {
-        const results = await fetchUrl("https://pokeapi.co/api/v2/pokemon?limit=56&offset=0")
+        const results = await fetchUrl("https://pokeapi.co/api/v2/pokemon?limit=110&offset=0")
+        const res = await fetchApi("https://pokeapi.co/api/v2/type?")
         setData(results)
+        setType(res.results)
       } catch (err) {
         console.log(err)
       }
     })()
   }, [])
 
-  const searching = data.filter((e)=> (e.name.toLocaleLowerCase()).includes(search.toLocaleLowerCase()))
+  const query = search.toLocaleLowerCase();
+  const selectedType = param.get("type") || "";
 
+  const searching = data.filter((e) => {
+    const nameMatch = e.name.toLocaleLowerCase().includes(query);
+    
+    const typeMatch = selectedType 
+      ? e.types.some((t) => t.toLocaleLowerCase().includes(selectedType.toLocaleLowerCase()))
+      : true;
+
+    return nameMatch && typeMatch;
+  });
 
   function getSearch (e) {
     e.preventDefault()
@@ -64,8 +77,37 @@ function Pokemon() {
           <img src="/search.svg" alt="search" />
           <span className='font-bold text-md text-[#0fffaf]'>SEARCH</span>
         </button>
-
       </form>
+
+      <section 
+        className='flex flex-wrap items-center justify-center gap-6 py-4 px-4'
+      >
+        { type.length < 1 
+          ? (<p>Loading....</p>)
+          : (
+            type.map((re, id)=>{
+              return (
+                <span  onClick={
+                  (e)=> {
+                    e.preventDefault()
+                    const name = re.name
+                    setParam((prevParam)=> {
+                      if(name){
+                        prevParam.set("type", name)
+                      } else {
+                        prevParam.delete("type")
+                      }
+                      return prevParam
+                    })
+                  }
+
+                } className='border flex justify-center py-1 px-2 text-md rounded-md cursor-pointer' key={id}>{re.name.toUpperCase()}</span>
+              )
+            })
+          ) 
+        }
+      </section>
+
       <div className='grid grid-cols-4 gap-3 p-4'>{
       searching.length < 1  ? <p className='text-red-400 w-full flex h-screen items-center justify-center col-span-4 text-bold text-4xl'>"{search}" not found!</p> :  
         searching.map((res, idx)=> {
