@@ -42,7 +42,7 @@ function Detail() {
     
   return (
     <div className="flex w-full h-screen items-start pt-20 px-5 justify-center">
-        <article className='grid grid-cols-2 rounded-xl items-center justify-between bg-blue-100 border-l-2 border-b-5 border-b-emerald-200 w-8/10 gap-2 px-1'>
+        <article className='grid grid-cols-[1fr_auto] rounded-xl items-center justify-between bg-blue-100 border-l-2 border-b-5 border-b-emerald-200 w-8/10 gap-2 px-1'>
             { !data
                 ? (<span>Loading</span>)
                 : (<>
@@ -57,12 +57,12 @@ function Detail() {
                           })}
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-2 py-2">
+                    <div className="grid grid-cols-2 gap-2 p-2">
                         {data.stats.map((r, i) => {
                             return (
-                                <div className="flex flex-col items-center justify-center border rounded-xl text-xs">
-                                    <span className='text-lg'>{r.value}</span>
-                                    <span>{r.name.toUpperCase()}</span>
+                                <div className="bg-emerald-200 flex items-center justify-between gap-2 rounded-xl text-xs p-2">
+                                    <span className='text-lg font-bold'>{r.value}</span>
+                                    <span className='text-xs'>{r.name.toUpperCase()}</span>
                                 </div>
                             )
                         })}
