@@ -5,13 +5,14 @@ import { Link, useSearchParams,  } from 'react-router'
 function Pokemon() {
   const [param, setParam] = useSearchParams()
   const [search, setSearch] = useState(param.get("search") || "")
+  const [selectedType, setSelectedType ] = useState(param.get("type") || "")
   const [type, setType] = useState([])
   const [data, setData] = useState([])
 
   useEffect(()=>{
     (async()=> {
       try {
-        const results = await fetchUrl("https://pokeapi.co/api/v2/pokemon?limit=110&offset=0")
+        const results = await fetchUrl("https://pokeapi.co/api/v2/pokemon?limit=300&offset=0")
         const res = await fetchApi("https://pokeapi.co/api/v2/type?")
         setData(results)
         setType(res.results)
@@ -22,7 +23,6 @@ function Pokemon() {
   }, [])
 
   const query = search.toLocaleLowerCase();
-  const selectedType = param.get("type") || "";
 
   const searching = data.filter((e) => {
     const nameMatch = e.name.toLocaleLowerCase().includes(query);
@@ -75,7 +75,7 @@ function Pokemon() {
         />
         <button type='submit' className='flex gap-2 bg-cyan-100 justify-center items-center px-4 py-1 rounded-xl'>
           <img src="/search.svg" alt="search" />
-          <span className='font-bold text-md text-[#0fffaf]'>SEARCH</span>
+          <span className='font-bold text-md text-[#0fffaf] cursor-pointer'>SEARCH</span>
         </button>
       </form>
 
@@ -94,6 +94,7 @@ function Pokemon() {
                     setParam((prevParam)=> {
                       if(name){
                         prevParam.set("type", name)
+                        setSelectedType(name)
                       } else {
                         prevParam.delete("type")
                       }
@@ -101,7 +102,7 @@ function Pokemon() {
                     })
                   }
 
-                } className='border flex justify-center py-1 px-2 text-md rounded-md cursor-pointer' key={id}>{re.name.toUpperCase()}</span>
+                } className={`${selectedType === re.name ? "bg-emerald-200" : "bg-blue-100"} flex justify-center py-1 px-2 text-md rounded-md cursor-pointer`} key={id}>{re.name.toUpperCase()}</span>
               )
             })
           ) 
