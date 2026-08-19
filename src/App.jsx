@@ -7,17 +7,24 @@ import { Navigate, Route, Routes } from "react-router"
 import Layout from "./pages/Layout.jsx"
 import FromControlend from "./pages/FromControlend.jsx"
 import Detail from "./pages/Detail.jsx"
+import NewPokemon from "./pages/NewPokemon.jsx"
+import Login from "./pages/auth/Login.jsx"
 
 function App() {
   const [counter, setCounter] = useState(5)
   return (
     <Routes>
       <Route path="/" element={<Layout /> }> 
-        <Route index element={<Navigate to={<Review/>}/> } replace />
+        <Route index element={<Navigate to="/reviews" /> } replace />
         <Route path="reviews" element={<Review/>}/>
+        <Route path="newpokemon" element={<NewPokemon />}/>
         <Route path="pokemon">
           <Route index element={<Pokemon/>}/>
           <Route path=":id" element={<Detail/>}/>
+        </Route>
+        <Route path="auth">
+          <Route index element={<Navigate to="/auth/login" />} replace />
+          <Route path="login" element={<Login/>}/>
         </Route>
         <Route path="products" element={<Form/>}/>
         <Route path="counter" element={<Counter set={setCounter} get={counter} />}/>
