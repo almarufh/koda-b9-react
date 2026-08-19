@@ -39,39 +39,6 @@ function Detail() {
         })()
     },[res])
 
-    // useEffect(()=> {
-    //     (async()=> {
-    //         let res = await fetchApi(url)
-
-    //         let pokemon = {
-    //             id: res.id,
-    //             name: res.name,
-    //             foto: res.sprites.front_default,
-    //             stats: null,
-    //             types : []
-    //         }
-
-    //         const types = res.types
-    //         for (let p in types) {
-    //             pokemon.types.push(res.types[p].type.name)
-    //         }
-
-    //         const stats = res.stats.map((r)=> {
-    //             return {
-    //                 name: r.stat.name,
-    //                 value: r.base_stat
-    //             }
-    //         })
-
-    //         pokemon.stats = stats
-
-    //         setData(pokemon)
-
-    //     })()
-    // },[])
-
-
-    
   return (
     <div className="flex w-full h-screen items-start pt-20 px-5 justify-center">
         <article className='grid grid-cols-[1fr_auto] rounded-xl items-center justify-between bg-blue-100 border-l-2 border-b-5 border-b-emerald-200 w-8/10 gap-2 px-1'>
