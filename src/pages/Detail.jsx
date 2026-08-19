@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import {fetchApi} from '../utils/fetchUrl.js'
+// import {fetchApi} from '../utils/fetchUrl.js'
+import useFetch from '../hooks/useFetch.js'
 
 function Detail() {
     const [data, setData] = useState(null)
     const {id} = useParams()
     const url = `https://pokeapi.co/api/v2/pokemon/${id}/`
 
+    const {data: res} = useFetch(url)
+
     useEffect(()=> {
         (async()=> {
-            let res = await fetchApi(url)
-
             let pokemon = {
                 id: res.id,
                 name: res.name,
-                foto: res.sprites.front_default,
+                foto: res?.sprites.front_default,
                 stats: null,
                 types : []
             }
@@ -36,7 +37,38 @@ function Detail() {
             setData(pokemon)
 
         })()
-    },[])
+    },[res])
+
+    // useEffect(()=> {
+    //     (async()=> {
+    //         let res = await fetchApi(url)
+
+    //         let pokemon = {
+    //             id: res.id,
+    //             name: res.name,
+    //             foto: res.sprites.front_default,
+    //             stats: null,
+    //             types : []
+    //         }
+
+    //         const types = res.types
+    //         for (let p in types) {
+    //             pokemon.types.push(res.types[p].type.name)
+    //         }
+
+    //         const stats = res.stats.map((r)=> {
+    //             return {
+    //                 name: r.stat.name,
+    //                 value: r.base_stat
+    //             }
+    //         })
+
+    //         pokemon.stats = stats
+
+    //         setData(pokemon)
+
+    //     })()
+    // },[])
 
 
     
