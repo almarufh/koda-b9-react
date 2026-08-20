@@ -17,7 +17,7 @@ function Login() {
       name: e.email,
       password: btoa(e.password),
       role: "admin",
-      profile: "image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxMSAxMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUuNSAxLjM3NUw2LjE4NzUgMy40Mzc1TDguMjUgNC4xMjVMNi4xODc1IDQuODEyNUw1LjUgNi44NzVMNC44MTI1IDQuODEyNUwyLjc1IDQuMTI1TDQuODEyNSAzLjQzNzVMNS41IDEuMzc1WiIgc3Ryb2tlPSIjRkY1RjIyIiBzdHJva2Utd2lkdGg9IjAuOTE2NjY3IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTguNzA4MzcgMS4zNzVMOS4wNTIxMiAyLjQwNjI1TDEwLjA4MzQgMi43NUw5LjA1MjEyIDMuMDkzNzVMOC43MDgzNyA0LjEyNUw4LjM2NDYyIDMuMDkzNzVMNy4zMzMzNyAyLjc1TDguMzY0NjIgMi40MDYyNUw4LjcwODM3IDEuMzc1WiIgc3Ryb2tlPSIjRkY1RjIyIiBzdHJva2Utd2lkdGg9IjAuOTE2NjY3IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg=="
+      profile: "#"
     }  
     dispatch({type: "LOGIN", payload: newUser})
     console.log(state.actived)
@@ -31,7 +31,7 @@ function Login() {
         type: prevState.value ? "password" : "text"
       }
     }));
-  };
+  }; 
   return (
     <main className="flex w-full h-screen items-center justify-center">
         <form 
