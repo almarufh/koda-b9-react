@@ -3,11 +3,13 @@ import { NavLink, useNavigate} from "react-router"
 import users from "../context/usersContext.js"
 import { HiMenuAlt2 } from "react-icons/hi"
 import { useForm } from "react-hook-form"
+import { RiCloseLine } from "react-icons/ri"
 function Header() {
     const {state, dispatch} = useContext(users)
-    const [profile, setProfile] = useState(true)
+    const [profile, setProfile] = useState(false)
     const {register, handleSubmit} = useForm()
     const [nav, setNav] = useState(false)
+    const [navRight, setNavRight] = useState(false)
     const navigate = useNavigate()
     let navLink = [
         {
@@ -57,7 +59,8 @@ function Header() {
                 name: formData.name,
                 profile: base64Profile
             };
-            // console.log(payload)
+            // console.log(payload.profile)
+            
 
             dispatch({ type: "UPDATE", payload });
             console.log(state)
@@ -78,11 +81,34 @@ function Header() {
             ? 
             <>
             <span className="flex font-bold text-2xl text-dark">{state.actived?.name?.toUpperCase()}</span> 
-            <div className="h-75 w-75 bg-thirty rounded-full overflow-hidden flex items-center justify-center">
+            <div 
+                onClick={()=> {
+                    setNavRight(!navRight)
+                }}
+                className="h-75 w-75 bg-thirty rounded-full overflow-hidden flex items-center justify-center cursor-pointer">
                 <img src={`data:${state.actived.profile}`} />
             </div>
+            {navRight && <ul className="fixed right-16 top-85 w-150 flex flex-col gap-16 items-center py-12 px-8 round-8 bg-border-header text-xl">
+                <li 
+                    onClick={()=> {
+                        setProfile(!profile)
+                        setNavRight(!navRight)
+                    }}
+                    className="f-16 hover:text-primary font-bold cursor-pointer">My Profile</li>
+                <li 
+                    onClick={()=>{
+                        setNavRight(!navRight)
+                        dispatch({type: "LOGOUT"})
+                    }}
+                    className="text-font-error font-bold border-primary text-center border round-8 bg-primary6 cursor-pointer w-full">Logout</li>
+            </ul>}
             {profile && 
             <div className="bg-orange-50 border border-border-header  w-5/10 fixed top-85 right-[1%] flex items-center justify-center py-20 rounded-xl">
+            <RiCloseLine 
+                onClick={()=> {
+                    setProfile(!profile)
+                }}
+                className="absolute top-5 right-5 hover:text-font-error border round-8 cursor-pointer"/>
             <form
                 onSubmit={handleSubmit(changeProfile)}
                 className="flex flex-col gap-10"
