@@ -9,6 +9,7 @@ import FromControlend from "./pages/FromControlend.jsx"
 import Detail from "./pages/Detail.jsx"
 import NewPokemon from "./pages/NewPokemon.jsx"
 import Login from "./pages/auth/Login.jsx"
+import FormSurvey from "./pages/FormSurvey.jsx"
 
 function App() {
   const [counter, setCounter] = useState(5)
@@ -27,6 +28,7 @@ function App() {
           <Route path="login" element={<Login/>}/>
         </Route>
         <Route path="products" element={<Form/>}/>
+        <Route path="survey-movie" element={<FormSurvey/>} />
         <Route path="counter" element={<Counter set={setCounter} get={counter} />}/>
         <Route path="control" element={<FromControlend/>}/>
       </Route>
