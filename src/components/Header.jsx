@@ -35,6 +35,10 @@ function Header() {
         {
             link: "/newpokemon",
             name: "New Pokemon"
+        },
+        {
+            link: "survey-movie",
+            name: "Survey Movie"
         }
     ]
 
@@ -72,110 +76,110 @@ function Header() {
 
   return (
     <header
-        className='fixed w-full h-80 flex items-center justify-between py-18 px-16 bg-primary'
+        className='flex mb-80'
     >
-        <div 
-            className="order-2 flex items-center gap-16"
-        >
-            {state.actived.email 
-            ? 
-            <>
-            <span className="flex font-bold text-2xl text-dark">{state.actived?.name?.toUpperCase()}</span> 
-            <div 
-                onClick={()=> {
-                    setNavRight(!navRight)
-                }}
-                className="h-75 w-75 bg-thirty rounded-full overflow-hidden flex items-center justify-center cursor-pointer">
-                <img src={`data:${state.actived.profile}`} />
-            </div>
-            {navRight && <ul className="fixed right-16 top-85 w-150 flex flex-col gap-16 items-center py-12 px-8 round-8 bg-border-header text-xl">
-                <li 
+        <div className="fixed w-full h-80 flex items-center justify-between py-18 px-16 bg-primary">
+            <div
+                className="order-2 flex items-center gap-16"
+            >
+                {state.actived.email
+                ?
+                <>
+                <span className="flex font-bold text-2xl text-dark">{state.actived?.name?.toUpperCase()}</span>
+                <div
+                    onClick={()=> {
+                        setNavRight(!navRight)
+                    }}
+                    className="h-75 w-75 bg-thirty rounded-full overflow-hidden flex items-center justify-center cursor-pointer">
+                    <img src={`data:${state.actived.profile}`} />
+                </div>
+                {navRight && <ul className="fixed right-16 top-85 w-150 flex flex-col gap-16 items-center py-12 px-8 round-8 bg-border-header text-xl">
+                    <li
+                        onClick={()=> {
+                            setProfile(!profile)
+                            setNavRight(!navRight)
+                        }}
+                        className="f-16 hover:text-primary font-bold cursor-pointer">My Profile</li>
+                    <li
+                        onClick={()=>{
+                            setNavRight(!navRight)
+                            dispatch({type: "LOGOUT"})
+                        }}
+                        className="text-font-error font-bold border-primary text-center border round-8 bg-primary6 cursor-pointer w-full">Logout</li>
+                </ul>}
+                {profile &&
+                <div className="bg-orange-50 border border-border-header  w-5/10 fixed top-85 right-[1%] flex items-center justify-center py-20 rounded-xl">
+                <RiCloseLine
                     onClick={()=> {
                         setProfile(!profile)
-                        setNavRight(!navRight)
                     }}
-                    className="f-16 hover:text-primary font-bold cursor-pointer">My Profile</li>
-                <li 
-                    onClick={()=>{
-                        setNavRight(!navRight)
-                        dispatch({type: "LOGOUT"})
-                    }}
-                    className="text-font-error font-bold border-primary text-center border round-8 bg-primary6 cursor-pointer w-full">Logout</li>
-            </ul>}
-            {profile && 
-            <div className="bg-orange-50 border border-border-header  w-5/10 fixed top-85 right-[1%] flex items-center justify-center py-20 rounded-xl">
-            <RiCloseLine 
-                onClick={()=> {
-                    setProfile(!profile)
-                }}
-                className="absolute top-5 right-5 hover:text-font-error border round-8 cursor-pointer"/>
-            <form
-                onSubmit={handleSubmit(changeProfile)}
-                className="flex flex-col gap-10"
-            >
-                <div className="flex flex-col items-center">
-                    <label htmlFor="profile" className="">
-                        <div className="h-200 w-200 bg-thirty border border-border-header rounded-full overflow-hidden flex items-center justify-center">
-                            <img src={`data:${state.actived.profile}`} alt="" className="object-cover" />
-                        </div>
-                    </label>
-                    <input 
-                        type="file" 
-                        {...register("profile")}
-                        className="hidden"
-                        id="profile"
-                    />
-                </div>
-                <div className="flex flex-col gap-2 text-primary font-bold">
-                    <label htmlFor="name">Nama Lengkap</label>
-                    <input 
-                        className={`outline-none border border-border-header px-8 py-6 round-8 text-dark`}
-                        type="text"
-                        {...register("name")}
-                        id="name"
-                        defaultValue={state.actived.email}
-                    />
-                </div>
-                <button className="text-xl font-bold px-8 py-4 w-fit self-center round-8 bg-primary">Submit</button>
-            </form>
-
-            </div>}
-            </>
+                    className="absolute top-5 right-5 hover:text-font-error border round-8 cursor-pointer"/>
+                <form
+                    onSubmit={handleSubmit(changeProfile)}
+                    className="flex flex-col gap-10"
+                >
+                    <div className="flex flex-col items-center">
+                        <label htmlFor="profile" className="">
+                            <div className="h-200 w-200 bg-thirty border border-border-header rounded-full overflow-hidden flex items-center justify-center">
+                                <img src={`data:${state.actived.profile}`} alt="" className="object-cover" />
+                            </div>
+                        </label>
+                        <input
+                            type="file"
+                            {...register("profile")}
+                            className="hidden"
+                            id="profile"
+                        />
+                    </div>
+                    <div className="flex flex-col gap-2 text-primary font-bold">
+                        <label htmlFor="name">Nama Lengkap</label>
+                        <input
+                            className={`outline-none border border-border-header px-8 py-6 round-8 text-dark`}
+                            type="text"
+                            {...register("name")}
+                            id="name"
+                            defaultValue={state.actived.email}
+                        />
+                    </div>
+                    <button className="text-xl font-bold px-8 py-4 w-fit self-center round-8 bg-primary">Submit</button>
+                </form>
+                </div>}
+                </>
             
-            : <span 
-                onClick={()=> {
-                    navigate("/auth/login")
-                }}
-                className="text-lg font-bold bg-dark px-16 py-8 round-8 text-light cursor-pointer">LOGIN</span>}
-        </div>
-        <nav
-            className="order-1 flex"
-        >
-            <HiMenuAlt2 
-                className="text-dark text-5xl cursor-pointer"
-                onClick={()=> {
-                    setNav(!nav)
-                }}
-            />
-
-            {nav && <ul
-                className="flex flex-col fixed top-75 left-16 bg-dark rounded-xl pr-20 py-8"
+                : <span
+                    onClick={()=> {
+                        navigate("/auth/login")
+                    }}
+                    className="text-lg font-bold bg-dark px-16 py-8 round-8 text-light cursor-pointer">LOGIN</span>}
+            </div>
+            <nav
+                className="order-1 flex"
             >
-                {navLink.map((res, idx)=> {
-                    return (
-                        <li key={idx} className="px-16 py-8 text-md font-bold text-primary">
-                            <NavLink 
-                                className={({ isActive }) =>
-                                   `${
-                                   isActive ? "bg-primary6 text-primary" : "text-light"
-                                   }`
-                               }
-                                to={res.link}>{res.name}</NavLink>
-                        </li>
-                    )
-                })}
-            </ul>}
-        </nav>
+                <HiMenuAlt2
+                    className="text-dark text-5xl cursor-pointer"
+                    onClick={()=> {
+                        setNav(!nav)
+                    }}
+                />
+                {nav && <ul
+                    className="flex flex-col fixed top-75 left-16 bg-dark rounded-xl pr-20 py-8"
+                >
+                    {navLink.map((res, idx)=> {
+                        return (
+                            <li key={idx} className="px-16 py-8 text-md font-bold text-primary">
+                                <NavLink
+                                    className={({ isActive }) =>
+                                       `${
+                                       isActive ? "bg-primary6 text-primary" : "text-light"
+                                       }`
+                                   }
+                                    to={res.link}>{res.name}</NavLink>
+                            </li>
+                        )
+                    })}
+                </ul>}
+            </nav>
+        </div>
     </header>
   )
 }
