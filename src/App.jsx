@@ -10,6 +10,7 @@ import Detail from "./pages/Detail.jsx"
 import NewPokemon from "./pages/NewPokemon.jsx"
 import Login from "./pages/auth/Login.jsx"
 import FormSurvey from "./pages/FormSurvey.jsx"
+import TodoList from "./pages/TodoList.jsx"
 
 function App() {
   const [counter, setCounter] = useState(5)
@@ -29,6 +30,7 @@ function App() {
         </Route>
         <Route path="products" element={<Form/>}/>
         <Route path="survey-movie" element={<FormSurvey/>} />
+        <Route path="todo-list" element={<TodoList />} />
         <Route path="counter" element={<Counter set={setCounter} get={counter} />}/>
         <Route path="control" element={<FromControlend/>}/>
       </Route>
