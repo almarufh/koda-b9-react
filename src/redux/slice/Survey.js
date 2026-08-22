@@ -25,8 +25,6 @@ const surveySlice = createSlice({
             }
         }
     }
-    
-
 })
 
 export const {add, del} = surveySlice.actions
