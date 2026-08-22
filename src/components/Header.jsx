@@ -37,8 +37,12 @@ function Header() {
             name: "New Pokemon"
         },
         {
-            link: "survey-movie",
+            link: "/survey-movie",
             name: "Survey Movie"
+        },
+        {
+            link: "/todo-list",
+            name: "Todo List"
         }
     ]
 
@@ -158,26 +162,39 @@ function Header() {
                 <HiMenuAlt2
                     className="text-dark text-5xl cursor-pointer"
                     onClick={()=> {
-                        setNav(!nav)
+                        if(nav === false) {
+                            setNav(true)
+                        } else {
+                            setNav(false)
+                        }
                     }}
                 />
-                {nav && <ul
-                    className="flex flex-col fixed top-75 left-16 bg-dark rounded-xl pr-20 py-8"
+                {nav && 
+                <div 
+                    onClick={()=> {
+                        setNav(!nav)
+                    }}
+                    className="inset-0 absolute w-full h-screen bg-black/10"
                 >
-                    {navLink.map((res, idx)=> {
-                        return (
-                            <li key={idx} className="px-16 py-8 text-md font-bold text-primary">
-                                <NavLink
-                                    className={({ isActive }) =>
-                                       `${
-                                       isActive ? "bg-primary6 text-primary" : "text-light"
-                                       }`
-                                   }
-                                    to={res.link}>{res.name}</NavLink>
-                            </li>
-                        )
-                    })}
-                </ul>}
+                    <ul
+                        className="flex flex-col fixed top-75 left-16 bg-dark rounded-xl pr-20 py-8"
+                    >
+                        {navLink.map((res, idx)=> {
+                            return (
+                                <li key={idx} className="px-16 py-8 text-md font-bold text-primary">
+                                    <NavLink
+                                        className={({ isActive }) =>
+                                           `${
+                                           isActive ? "bg-primary6 text-primary" : "text-light"
+                                           }`
+                                       }
+                                        to={res.link}>{res.name}</NavLink>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+                }
             </nav>
         </div>
     </header>
