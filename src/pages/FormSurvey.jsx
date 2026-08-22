@@ -12,7 +12,6 @@ function FormSurvey() {
 
     function submitForm(e) {
         e.id = `${Date.now()}`
-        console.log(e)
         dispatch(add(e))
     }
   return (
